@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../../axios-order';
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -17,7 +17,7 @@ const Register = () => {
       password,
     };
     axios
-      .post('http://localhost:4000/register', data)
+      .post('/register', data)
       .then(response => {
         if (response.data) {
           localStorage.setItem('token', response.data.token);

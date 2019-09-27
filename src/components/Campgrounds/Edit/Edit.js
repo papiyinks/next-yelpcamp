@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../../../axios-order';
 
 const Edit = props => {
   const [name, setName] = useState('');
@@ -14,7 +14,7 @@ const Edit = props => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:4000/campgrounds/' + props.match.params.id)
+      .get('/campgrounds/' + props.match.params.id)
       .then(response => {
         setName(response.data.name);
         setPrice(response.data.price);
@@ -36,15 +36,11 @@ const Edit = props => {
     };
     const token = localStorage.getItem('token');
     axios
-      .patch(
-        'http://localhost:4000/campgrounds/' + props.match.params.id,
-        obj,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+      .patch('/campgrounds/' + props.match.params.id, obj, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then(() =>
         props.history.push('/campgrounds/' + props.match.params.id + '/show')
       );

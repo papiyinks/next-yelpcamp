@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../../../../axios-order';
 
 const Table = props => {
   const [redirect, setRedirect] = useState(false);
@@ -9,7 +9,7 @@ const Table = props => {
     const token = localStorage.getItem('token');
 
     axios
-      .delete('http://localhost:4000/campgrounds/' + props.obj._id, {
+      .delete('/campgrounds/' + props.obj._id, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

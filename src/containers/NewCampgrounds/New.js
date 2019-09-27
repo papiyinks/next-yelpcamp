@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../../axios-order';
 
 const NewCampground = () => {
   const [name, setName] = useState('');
@@ -25,7 +25,7 @@ const NewCampground = () => {
     const token = localStorage.getItem('token');
     console.log(token);
     axios
-      .post('http://localhost:4000/campgrounds', data, {
+      .post('/campgrounds', data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../../axios-order';
 import Body from './Body/Body';
 
 const Campgrounds = props => {
@@ -9,7 +9,7 @@ const Campgrounds = props => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:4000/campgrounds')
+      .get('/campgrounds')
       .then(response => {
         console.log(response.data);
         setCampground(response.data);

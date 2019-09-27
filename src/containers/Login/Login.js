@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../../axios-order';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -17,7 +17,7 @@ const Login = () => {
       password,
     };
     axios
-      .post('http://localhost:4000/login', data)
+      .post('/login', data)
       .then(response => {
         console.log(response);
         if (response.data) {

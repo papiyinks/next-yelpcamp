@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../../../axios-order';
 import Table from './Table/Table';
 
 const Show = props => {
@@ -11,7 +11,7 @@ const Show = props => {
     setUser(authUser);
 
     axios
-      .get('http://localhost:4000/campgrounds/' + props.match.params.id)
+      .get('/campgrounds/' + props.match.params.id)
       .then(response => {
         setCampground(response.data);
       })
