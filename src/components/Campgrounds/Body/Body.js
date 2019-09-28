@@ -1,5 +1,4 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import classes from './Body.css';
 
 const Body = props => {
@@ -13,10 +12,10 @@ const Body = props => {
 
         <p>
           <Link
-            to={'/campgrounds/' + props.obj._id + '/show'}
-            className="btn btn-primary"
+            href={`/campground/[${props.obj._id}]`}
+            as={`/campground/${props.obj._id}`}
           >
-            Show
+            <a className="btn btn-primary">Show more info</a>
           </Link>
         </p>
       </div>

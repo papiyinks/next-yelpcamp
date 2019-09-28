@@ -1,28 +1,28 @@
-import React, { useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import axios from '../../../../axios-order';
+// import React, { useState } from 'react';
+// import { Link, Redirect } from 'react-router-dom';
+import Router from 'next/router';
+import Link from 'next/link';
+import axios from '../../../axios-order';
+import { useRouter } from 'next/router';
 
 const Table = props => {
-  const [redirect, setRedirect] = useState(false);
+  const router = useRouter();
+  const { id } = router.query;
 
   const deleted = () => {
     const token = localStorage.getItem('token');
 
     axios
-      .delete('/campgrounds/' + props.obj._id, {
+      .delete(`/campgrounds/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then(response => {
-        setRedirect(true);
+        Router.push('/');
       })
       .catch(err => console.log(err));
   };
-
-  if (redirect) {
-    return <Redirect to={'/campgrounds'} />;
-  }
 
   return (
     <div>
@@ -43,13 +43,16 @@ const Table = props => {
               {props.userId === props.obj.owner && (
                 <p>
                   <Link
-                    style={{ marginRight: '10px' }}
-                    to={'/campgrounds/' + props.obj._id + '/edit'}
-                    className="btn btn-primary"
+                    href={`/edit/[${props.obj._id}]`}
+                    as={`/edit/${props.obj._id}`}
                   >
-                    Edit
+                    <a className="btn btn-primary">Edit</a>
                   </Link>
-                  <button onClick={deleted} className="btn btn-danger">
+                  <button
+                    onClick={deleted}
+                    style={{ marginLeft: '10px' }}
+                    className="btn btn-danger"
+                  >
                     Delete
                   </button>
                 </p>

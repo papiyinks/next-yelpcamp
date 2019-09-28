@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../../../axios-order';
+import { useRouter } from 'next/router';
+import Router from 'next/router';
+import Navbar from '../../../components/Navbar/Navbar';
 
 const Edit = props => {
   const [name, setName] = useState('');
@@ -12,9 +15,12 @@ const Edit = props => {
   const handleImageChange = event => setImage(event.target.value);
   const handleDescriptionChange = event => setDescription(event.target.value);
 
+  const router = useRouter();
+  const { id } = router.query;
+
   useEffect(() => {
     axios
-      .get('/campgrounds/' + props.match.params.id)
+      .get(`/campgrounds/${id}`)
       .then(response => {
         setName(response.data.name);
         setPrice(response.data.price);
@@ -36,63 +42,71 @@ const Edit = props => {
     };
     const token = localStorage.getItem('token');
     axios
-      .patch('/campgrounds/' + props.match.params.id, obj, {
+      .patch(`/campgrounds/${id}`, obj, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then(() =>
-        props.history.push('/campgrounds/' + props.match.params.id + '/show')
+      .then(
+        () => Router.push(`/campground/${id}`)
+        // props.history.push('/campgrounds/' + props.match.params.id + '/show')
       );
   };
 
   return (
-    <div className="container">
-      <h3 align="center">Edit {name}</h3>
-      <div style={{ width: '40%', margin: '25px auto' }}>
-        <form onSubmit={onSubmit}>
-          <div className="form-group">
-            <input
-              type="text"
-              name="name"
-              className="form-control"
-              value={name}
-              onChange={handleNameChange}
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type="text"
-              name="price"
-              className="form-control"
-              value={price}
-              onChange={handlePriceChange}
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type="text"
-              name="image"
-              className="form-control"
-              value={image}
-              onChange={handleImageChange}
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type="text"
-              name="description"
-              className="form-control"
-              value={description}
-              onChange={handleDescriptionChange}
-            />
-          </div>
-          <div className="form-group">
-            <input type="submit" value="Submit" className="btn btn-primary" />
-          </div>
-        </form>
+    <>
+      <Navbar />
+      <div className="container">
+        <h3 align="center">Edit {name}</h3>
+        <div style={{ width: '40%', margin: '25px auto' }}>
+          <form onSubmit={onSubmit}>
+            <div className="form-group">
+              <input
+                type="text"
+                name="name"
+                className="form-control"
+                value={name}
+                onChange={handleNameChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <input
+                type="text"
+                name="price"
+                className="form-control"
+                value={price}
+                onChange={handlePriceChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <input
+                type="text"
+                name="image"
+                className="form-control"
+                value={image}
+                onChange={handleImageChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <input
+                type="text"
+                name="description"
+                className="form-control"
+                value={description}
+                onChange={handleDescriptionChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <input type="submit" value="Submit" className="btn btn-primary" />
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
