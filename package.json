@@ -70,8 +70,9 @@
   },
   "scripts": {
     "dev": "next",
-    "start": "next start",
     "build": "next build",
+    "start": "next start -p $PORT",
+    "heroku-postbuild": "npm run build",
     "test": "node scripts/test.js"
   },
   "eslintConfig": {
