@@ -4,7 +4,3 @@ const Products = () => {
   return <Campgrounds />;
 };
 export default Products;
-
-// export default () => {
-//   return <Campgrounds />;
-// };

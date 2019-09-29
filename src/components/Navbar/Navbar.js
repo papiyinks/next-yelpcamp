@@ -1,19 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Link from 'next/link';
-import Router from 'next/router';
-
-const logout = () => {
-  // alert('logged out');
-  localStorage.setItem('token', '');
-  localStorage.clear();
-  Router.push('/');
-};
-
-// const userId = () => {
-//   localStorage.setItem('token');
-// };
+import UserContext from '../UserContext';
 
 const Navbar = () => {
+  const { user, signOut } = useContext(UserContext);
+
   return (
     <div>
       <nav className="navbar navbar-default">
@@ -23,54 +14,34 @@ const Navbar = () => {
               <a className="navbar-brand">YelpCamp</a>
             </Link>
           </div>
-          {/* {!userId ? ( */}
           <div className="collapse navbar-collapse">
             <ul className="nav navbar-nav navbar-right">
               <li>
-                <Link href="/campgrounds">
-                  <a>Campgrounds</a>
-                </Link>
+                <a href="/campgrounds">Campgrounds</a>
               </li>
-              <li>
-                <Link href="/login">
-                  <a>Login</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/register">
-                  <a>Signup</a>
-                </Link>
-              </li>
-              <li
-                style={{ paddingTop: '15px', cursor: 'pointer' }}
-                onClick={logout}
-              >
-                logout
-              </li>
+              {user ? (
+                <li
+                  style={{ paddingTop: '15px', cursor: 'pointer' }}
+                  onClick={signOut}
+                >
+                  logout
+                </li>
+              ) : (
+                <>
+                  <li>
+                    <Link href="/login">
+                      <a>Login</a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/register">
+                      <a>Signup</a>
+                    </Link>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
-          {/* ) : ( */}
-          {/* <div className="collapse navbar-collapse">
-              <ul className="nav navbar-nav navbar-right">
-                <li>
-                  <Link href="/campgrounds">
-                    <a>Campgrounds</a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/login">
-                    <a>Login</a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/register">
-                    <a>Signup</a>
-                  </Link>
-                </li>
-
-              </ul>
-            </div> */}
-          {/* )} */}
         </div>
       </nav>
     </div>

@@ -59,7 +59,7 @@ const NewCampground = () => {
             <div className="form-group">
               <input
                 className="form-control"
-                type="text"
+                type="number"
                 placeholder="price"
                 value={price}
                 required

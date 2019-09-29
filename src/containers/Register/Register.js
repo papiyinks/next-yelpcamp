@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from '../../axios-order';
 import Router from 'next/router';
+import Link from 'next/link';
 import Navbar from '../../components/Navbar/Navbar';
 
 const Register = () => {
@@ -63,8 +64,13 @@ const Register = () => {
             </button>
           </form>
           <p style={{ paddingTop: '10px' }}>
-            <a href="/login">Click here to login</a>
+            <Link href="/login">
+              <a>Click here to login</a>
+            </Link>
           </p>
+          {/* <p style={{ paddingTop: '10px' }}>
+            <a href="/login">Click here to login</a>
+          </p> */}
         </div>
       </div>
     </>

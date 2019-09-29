@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from '../../axios-order';
 import Body from './Body/Body';
 import Link from 'next/link';
 import Navbar from '../Navbar/Navbar';
+import UserContext from '../UserContext';
 
 const Campgrounds = () => {
   const [campground, setCampground] = useState([]);
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     axios
@@ -35,11 +37,13 @@ const Campgrounds = () => {
           <div className="container">
             <h1>Welcome To YelpCamp</h1>
             <p>View our hand picked campgrounds from all over the world</p>
-            <p>
-              <Link href="/new" as="/campgrounds/new">
-                <a className="btn btn-primary btn-lg">Add New Campground</a>
-              </Link>
-            </p>
+            {user && (
+              <p>
+                <Link href="/new" as="/new">
+                  <a className="btn btn-primary btn-lg">Add New Campground</a>
+                </Link>
+              </p>
+            )}
           </div>
         </header>
 

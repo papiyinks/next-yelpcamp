@@ -19,10 +19,9 @@ const Login = () => {
     axios
       .post('/login', data)
       .then(response => {
-        console.log(response);
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.user));
-        Router.push('/campgrounds');
+        Router.push('/');
       })
       .catch(error => {
         console.log(error.response);

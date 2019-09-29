@@ -1,13 +1,6 @@
-// import React from 'react';
-// import App from '../src/App';
-import Navbar from '../src/components/Navbar/Navbar';
+import Landing from '../src/components/Landing/Landing';
 
 const Index = () => {
-  return (
-    <>
-      <Navbar />
-      <div>landing</div>
-    </>
-  );
+  return <Landing />;
 };
 export default Index;
