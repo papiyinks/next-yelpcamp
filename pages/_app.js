@@ -1,5 +1,6 @@
 import React from 'react';
 import App from 'next/app';
+import Head from 'next/head';
 import Router from 'next/router';
 import UserContext from '../src/components/UserContext';
 
@@ -13,7 +14,7 @@ export default class MyApp extends App {
   }
 
   componentDidMount() {
-    const user = localStorage.getItem('user');
+    const user = localStorage.getItem('token');
     console.log(user);
     if (user) {
       this.setState({
@@ -37,15 +38,20 @@ export default class MyApp extends App {
     const { Component, pageProps } = this.props;
 
     return (
-      <UserContext.Provider
-        value={{
-          user: this.state.user,
-          signIn: this.signIn,
-          signOut: this.signOut,
-        }}
-      >
-        <Component {...pageProps} />
-      </UserContext.Provider>
+      <>
+        <Head>
+          <title>Yelcamp</title>
+        </Head>
+        <UserContext.Provider
+          value={{
+            user: this.state.user,
+            signIn: this.signIn,
+            signOut: this.signOut,
+          }}
+        >
+          <Component {...pageProps} />
+        </UserContext.Provider>
+      </>
     );
   }
 }

@@ -22,7 +22,8 @@ const Register = () => {
       .then(response => {
         if (response.data) {
           localStorage.setItem('token', response.data.token);
-          Router.push('/campgrounds');
+          localStorage.setItem('user', JSON.stringify(response.data.user));
+          Router.push('/');
         } else {
           console.log('Register Error');
         }
