@@ -9,16 +9,16 @@ const Campgrounds = () => {
   const [campground, setCampground] = useState([]);
   const { user } = useContext(UserContext);
 
-  useEffect(() => {
-    axios
-      .get('/campgrounds')
-      .then(response => {
-        setCampground(response.data);
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get('/campgrounds')
+  //     .then(response => {
+  //       setCampground(response.data);
+  //     })
+  //     .catch(function(error) {
+  //       console.log(error);
+  //     });
+  // }, []);
 
   const tabRow = () => {
     return (

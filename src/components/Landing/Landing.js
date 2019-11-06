@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import styled from 'styled-components';
 
 const Landing = props => {
@@ -83,9 +84,9 @@ const Landing = props => {
     <div>
       <Header>
         <H1>Welcome to YelpCamp!</H1>
-        <a href="/campgrounds" className="btn btn-lg btn-success">
-          View All Campgrounds
-        </a>
+        <Link href="/campgrounds">
+          <a className="btn btn-lg btn-success">View All Campgrounds</a>
+        </Link>
       </Header>
 
       <Slideshow>

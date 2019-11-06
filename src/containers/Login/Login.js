@@ -21,7 +21,7 @@ const Login = () => {
       .then(response => {
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.user));
-        Router.push('/');
+        Router.push('/campgrounds');
       })
       .catch(error => {
         console.log(error.response);

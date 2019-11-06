@@ -37,11 +37,10 @@ export default class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props;
 
+    console.log('render');
+
     return (
       <>
-        <Head>
-          <title>Yelcamp</title>
-        </Head>
         <UserContext.Provider
           value={{
             user: this.state.user,
